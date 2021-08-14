@@ -1,0 +1,73 @@
+package HomeWork_4;
+//Glazyrin
+import java.util.*;
+
+public class hw4 {
+
+    public static void main(String[] args) {
+        task1();
+        task2();
+    }
+
+    private static void task1() {
+        Map<String, Integer> hm = new HashMap<String, Integer>();
+        String[] words = {
+                "Кофе", "Картошка", "Арбуз",
+                "Шарик", "Шарф", "Вилка",
+                "Собака", "Цветок", "Сорняк",
+                "Норка", "Нож", "Кофе",
+                "Картошка", "Арбуз", "Вилка",
+                "Собака", "Нож", "Цветок", "Норка"
+        };
+
+        for (int i = 0; i < words.length; i++) {
+            if (hm.containsKey(words[i]))
+                hm.put(words[i], hm.get(words[i]) + 1);
+            else
+                hm.put(words[i], 1);
+        }
+        System.out.println(hm);
+    }
+
+    private static void task2() {
+        Directory directory = new Directory();
+
+        directory.add("Иванов", "8445688652");
+        directory.add("Иванов", "89124565657");
+        directory.add("Бобров", "8917155552");
+        directory.add("Бобров", "8444777558");
+        directory.add("Шпитд", "8744456875");
+        directory.add("Никитин", "8454545784");
+        directory.add("Бобров", "8457856645");
+        directory.add("Смирнов", "8998754123");
+        directory.add("Макаревич", "87778546789");
+
+        System.out.println(directory.get("Иванов"));
+        System.out.println(directory.get("Макаревич"));
+        System.out.println(directory.get("Бобров"));
+        System.out.println(directory.get("Смирнов"));
+        System.out.println(directory.get("Шпитд"));
+    }
+}
+
+class Directory {
+    private Map<String, List<String>> directory_hm = new HashMap<String, List<String>>();
+    private List<String> phone_number_list;
+
+    public void add(String surname, String phone_number) {
+        if (directory_hm.containsKey(surname)) {
+            phone_number_list = directory_hm.get(surname);
+            phone_number_list.add(phone_number);
+            directory_hm.put(surname, phone_number_list);
+        } else {
+            phone_number_list = new ArrayList<String>();
+            phone_number_list.add(phone_number);
+            directory_hm.put(surname, phone_number_list);
+        }
+    }
+
+    public List<String> get(String surname) {
+        return directory_hm.get(surname);
+    }
+
+}
